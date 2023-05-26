@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Player</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #videoPlayer {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #video {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="videoPlayer">
+        <video id="video" autoplay controls loop>
+            <source src="./static/afternoon.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <script>
+        var videoElement = document.getElementById('video');
+
+        function changeVideoByTime() {
+            var currentTime = new Date().getHours();
+
+            if (currentTime >= 6 && currentTime < 12) {
+                videoElement.src = "./static/morning.mp4";
+            } else if (currentTime >= 12 && currentTime < 18) {
+                videoElement.src = "./static/afternoon.mp4";
+            } else {
+                videoElement.src = "./static/evening.mp4";
+            }
+
+            videoElement.load();
+            videoElement.play();
+        }
+
+        changeVideoByTime();
+
+        // Loop the video when it ends
+        videoElement.addEventListener('ended', function() {
+            videoElement.currentTime = 0;
+            videoElement.play();
+        });
+    </script>
+</body>
+</html>
