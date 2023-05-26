@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fullscreen Video</title>
+    <title>Video Background</title>
     <style>
         html, body {
             height: 100%;
@@ -10,20 +10,38 @@
             overflow: hidden;
         }
 
-        #video {
+        #videoBackground {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        #video {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+        }
+
+        #content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #fff;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
-    <video id="video" autoplay loop muted playsinline>
-        <source src="./static/afternoon.mp4" type="video/mp4">
-    </video>
+    <div id="videoBackground">
+        <video id="video" autoplay loop muted>
+            <source src="./static/afternoon.mp4" type="video/mp4">
+        </video>
+    </div>
 
     <script>
         var videoElement = document.getElementById('video');
@@ -44,24 +62,6 @@
         }
 
         changeVideoByTime();
-
-        // Enter fullscreen on video click
-        videoElement.addEventListener('click', function() {
-            if (videoElement.requestFullscreen) {
-                videoElement.requestFullscreen();
-            } else if (videoElement.mozRequestFullScreen) { // Firefox
-                videoElement.mozRequestFullScreen();
-            } else if (videoElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                videoElement.webkitRequestFullscreen();
-            } else if (videoElement.msRequestFullscreen) { // IE/Edge
-                videoElement.msRequestFullscreen();
-            }
-        });
-
-        // Prevent right-click context menu on video
-        videoElement.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-        });
     </script>
 </body>
 </html>
