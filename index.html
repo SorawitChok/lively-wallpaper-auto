@@ -1,62 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <meta charset="UTF-8">
     <title>Video Background</title>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        #videoBackground {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        #video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        #content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            color: #fff;
-            font-size: 24px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="videoBackground">
-        <video id="video" autoplay loop muted>
-            <source src="./static/afternoon.mp4" type="video/mp4">
-        </video>
-    </div>
+    <video id="video" autoplay loop muted playsinline>
+        <source src="./static/afternoon.mp4" type="video/mp4">
+    </video>
 
     <script>
         var videoElement = document.getElementById('video');
 
         function changeVideoByTime() {
             var currentTime = new Date().getHours();
+            var videoSource;
 
             if (currentTime >= 6 && currentTime < 12) {
-                videoElement.src = "./static/morning.mp4";
+                videoSource = "./static/morning.mp4";
             } else if (currentTime >= 12 && currentTime < 18) {
-                videoElement.src = "./static/afternoon.mp4";
+                videoSource = "./static/afternoon.mp4";
             } else {
-                videoElement.src = "./static/evening.mp4";
+                videoSource = "./static/evening.mp4";
             }
 
+            videoElement.src = videoSource;
             videoElement.load();
             videoElement.play();
         }
@@ -64,4 +35,5 @@
         changeVideoByTime();
     </script>
 </body>
+
 </html>
